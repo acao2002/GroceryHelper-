@@ -10,6 +10,7 @@ console.log('This is after the read call');
 
 app.use(cors({origin: 'http://localhost:3000/'}));
 app.get('/', cors(), function(req, res) {
+  //run python  
   fs.readFile('info.json', (err, data) => {
     if (err) throw err;
     let info = JSON.parse(data);

@@ -14,9 +14,16 @@ const Home = () => {
 
     return(
         <div className="App">
-            <p style={{fontSize: "20px"}}>
+            <Row style={{
+                fontSize: "30px", 
+                backgroundColor: "#5EE0BE",
+                justifyContent: "center",
+                borderRadius: "20px",
+                margin: "10px",
+                paddingBlock: "10px",
+            }}>
                 Home
-            </p>
+            </Row>
             <Row>
                 <Col span={24}>col</Col>
             </Row>
