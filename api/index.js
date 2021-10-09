@@ -11,7 +11,6 @@ console.log('This is after the read call');
 
 app.use(cors({origin: 'http://localhost:3000/'}));
 
-/*
 app.get('/', cors(), function(req, res) {
   //run python  
   fs.readFile('info.json', (err, data) => {
@@ -20,7 +19,8 @@ app.get('/', cors(), function(req, res) {
     res.send(info);
   });
 });
-*/
+
+/*
 app.get('/', (req, res) => {
  
   var dataToSend;
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
   res.send(dataToSend)
   });
 })
-
+*/
 app.listen(process.env.PORT || 8080);
 console.log('API is running on http://localhost:8080');
 module.exports = app;
