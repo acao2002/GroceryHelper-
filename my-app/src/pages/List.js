@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import './List.css';
 
 const List = () => {
     const history = useHistory();
@@ -11,21 +12,16 @@ const List = () => {
     }, [location]);
 
     return(
+
         <div className="App">
+            <div class="parallax">
+
+            </div>
+
             <header className="App-header">
                 <p>
-                    List
+                    Hi Guys
                 </p>
-                <a
-                className="App-link"
-                onClick={() => {
-                    history.push({
-                        pathname: basePath + "/home",
-                    });
-                }}
-                >
-                    Go to Home
-                </a>
             </header>
         </div>
     )
