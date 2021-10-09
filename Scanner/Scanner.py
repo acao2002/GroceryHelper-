@@ -143,7 +143,7 @@ def run_detector(detector, path):
       index+=1
     else:
       break
-  display_image(image_with_boxes)
+  #display_image(image_with_boxes)
   return list
   
 
@@ -167,4 +167,7 @@ output = []
 for item in datastore:
     if item['item'].lower() in found:
         output.append(item)
+
 print(output)
+with open('data.json', 'w') as fp:
+    json.dump(output, fp,  indent=4)
