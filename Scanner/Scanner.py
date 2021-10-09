@@ -22,11 +22,11 @@ from PIL import ImageOps
 import time
 
 # Print Tensorflow version
-print(tf.__version__)
+# print(tf.__version__)
 
 # Check available GPU devices.
-print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
-
+# print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
+'''
 def display_image(image):
   fig = plt.figure(figsize=(20, 15))
   plt.grid(True)
@@ -107,8 +107,8 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
           display_str_list=[display_str])
       np.copyto(image, np.array(image_pil))
     return image
-
-
+'''
+#load image data 
 def load_img(path):
   img = tf.io.read_file(path)
   img = tf.image.decode_jpeg(img, channels=3)
@@ -117,6 +117,7 @@ def load_img(path):
 
 
 def run_detector(detector, path):
+
   img = load_img(path)
 
   converted_img  = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...]
@@ -129,15 +130,18 @@ def run_detector(detector, path):
   print("Found %d objects." % len(result["detection_scores"]))
   print("Inference time: ", end_time-start_time)
 
-  image_with_boxes = draw_boxes(
-      img.numpy(), result["detection_boxes"],
-      result["detection_class_entities"], result["detection_scores"])
+  # image_with_boxes = draw_boxes(
+  #     img.numpy(), result["detection_boxes"],
+  #     result["detection_class_entities"], result["detection_scores"])
 
   index = 0;
   list = []
+
   for x in result["detection_class_entities"]:
-    if result["detection_scores"][index] > 0.5: 
+
+    if result["detection_scores"][index] > 0.6: 
       print(x.decode("ascii"))
+      #get a list of found objects 
       if x.decode("ascii").lower() not in list:
           list.append(x.decode("ascii").lower())
       index+=1
@@ -161,13 +165,17 @@ for item in datastore:
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
 
 detector = hub.load(module_handle).signatures['default']
-found = run_detector(detector, "test7.jpg")
+
+file = input("Please enter the name of your file(ex: \"grocery.jpg\": ")
+found = run_detector(detector, file)
 print(found)
 output = []
+
 for item in datastore:
     if item['item'].lower() in found:
         output.append(item)
 
 print(output)
+
 with open('data.json', 'w') as fp:
     json.dump(output, fp,  indent=4)
