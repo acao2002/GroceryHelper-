@@ -1,22 +1,6 @@
 [
     {
-        "item": "apple",
-        "expidays": "28"
-    },
-    {
-        "item": "orange",
+        "item": "cabbage",
         "expidays": "7"
-    },
-    {
-        "item": "lemon",
-        "expidays": "21"
-    },
-    {
-        "item": "pineapple",
-        "expidays": "4"
-    },
-    {
-        "item": "fruit",
-        "expidays": "5"
     }
 ]
