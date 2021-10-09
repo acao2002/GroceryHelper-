@@ -1,0 +1,9 @@
+.parallax{
+    background-image: url("./my_fridge.png");
+    min-height: 130px;
+
+
+    background-attachment: fixed;
+    background-size: 100% auto;
+    background-position: top;
+}
