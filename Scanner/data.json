@@ -1,0 +1,22 @@
+[
+    {
+        "item": "apple",
+        "expidays": "28"
+    },
+    {
+        "item": "orange",
+        "expidays": "7"
+    },
+    {
+        "item": "lemon",
+        "expidays": "21"
+    },
+    {
+        "item": "pineapple",
+        "expidays": "4"
+    },
+    {
+        "item": "fruit",
+        "expidays": "5"
+    }
+]

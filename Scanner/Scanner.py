@@ -1,3 +1,4 @@
+import json
 import tensorflow as tf
 
 import tensorflow_hub as hub
@@ -131,11 +132,42 @@ def run_detector(detector, path):
   image_with_boxes = draw_boxes(
       img.numpy(), result["detection_boxes"],
       result["detection_class_entities"], result["detection_scores"])
-  print(result["detection_class_entities"])
-  display_image(image_with_boxes)
 
+  index = 0;
+  list = []
+  for x in result["detection_class_entities"]:
+    if result["detection_scores"][index] > 0.5: 
+      print(x.decode("ascii"))
+      if x.decode("ascii").lower() not in list:
+          list.append(x.decode("ascii").lower())
+      index+=1
+    else:
+      break
+  #display_image(image_with_boxes)
+  return list
+  
+
+
+
+
+with open("Items.json", 'r') as f:
+
+    datastore = json.load(f)
+    items = []
+
+for item in datastore:
+    items.append(item['item'].lower())
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
 
 detector = hub.load(module_handle).signatures['default']
-run_detector(detector, "test3.png")
+found = run_detector(detector, "test7.jpg")
+print(found)
+output = []
+for item in datastore:
+    if item['item'].lower() in found:
+        output.append(item)
+
+print(output)
+with open('data.json', 'w') as fp:
+    json.dump(output, fp,  indent=4)
