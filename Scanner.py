@@ -4,6 +4,7 @@ import tensorflow_hub as hub
 
 # For downloading the image.
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import tempfile
 from six.moves.urllib.request import urlopen
 from six import BytesIO
@@ -27,24 +28,9 @@ print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
 
 def display_image(image):
   fig = plt.figure(figsize=(20, 15))
-  plt.grid(False)
+  plt.grid(True)
   plt.imshow(image)
-
-
-def download_and_resize_image(url, new_width=256, new_height=256,
-                              display=False):
-  _, filename = tempfile.mkstemp(suffix=".jpg")
-  response = urlopen(url)
-  image_data = response.read()
-  image_data = BytesIO(image_data)
-  pil_image = Image.open(image_data)
-  pil_image = ImageOps.fit(pil_image, (new_width, new_height), Image.ANTIALIAS)
-  pil_image_rgb = pil_image.convert("RGB")
-  pil_image_rgb.save(filename, format="JPEG", quality=90)
-  print("Image downloaded to %s." % filename)
-  if display:
-    display_image(pil_image)
-  return filename
+  plt.show()
 
 
 def draw_bounding_box_on_image(image,
@@ -121,12 +107,6 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
       np.copyto(image, np.array(image_pil))
     return image
 
-def detect_img(image_url):
-  start_time = time.time()
-  image_path = download_and_resize_image(image_url, 640, 480)
-  run_detector(detector, image_path)
-  end_time = time.time()
-  print("Inference time:",end_time-start_time)
 
 def load_img(path):
   img = tf.io.read_file(path)
@@ -151,10 +131,11 @@ def run_detector(detector, path):
   image_with_boxes = draw_boxes(
       img.numpy(), result["detection_boxes"],
       result["detection_class_entities"], result["detection_scores"])
-
+  print(result["detection_class_entities"])
   display_image(image_with_boxes)
+
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
 
 detector = hub.load(module_handle).signatures['default']
-run_detector(detector, "test.png")
+run_detector(detector, "test3.png")
