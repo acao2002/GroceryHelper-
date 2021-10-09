@@ -1,0 +1,18 @@
+{ 
+  "items" : {
+    "apple" : {
+      "amount": 1,
+      "expiration-date": "2020-03-09T22:18:26.625Z"
+    },
+    "banana": {
+      "amount": 2,
+      "expiration-date": "2020-08-09T22:18:26.625Z"
+    }
+  },
+  "recipe": {
+    "apple pie":{
+      "url": "www.google.com",
+      "ingredients": ["apple", "flour", "sugar"]
+    }
+  }
+}
