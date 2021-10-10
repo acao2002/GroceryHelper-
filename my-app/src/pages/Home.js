@@ -39,6 +39,7 @@ const Home = () => {
         const getRecords = async () => {
             axios.get("http://localhost:8080/")
             .then(response => {
+                console.log(response.data)
                 setList(response.data);
             })
             .catch(error => console.log('error', error));
@@ -62,9 +63,9 @@ const Home = () => {
                                 padding: "15px",
                                 boxShadow: "0px 15px 10px -15px rgba(108, 116, 143, 0.8)",
                             }}>
-                                <Col span={12}>{items.item}</Col>
+                                <Col span={12}>{items.item} </Col>
                                 <Col span={12}
-                                >{items.expire} days left{items.expire < 3? "!!!": ""}</Col>
+                                >{items.expidays} days left{items.expidays < 3? "!!!": ""}</Col>
                             </Row>
                         );
                     })}

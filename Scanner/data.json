@@ -1,6 +1,18 @@
 [
     {
-        "item": "cabbage",
+        "item": "orange",
         "expidays": "7"
+    },
+    {
+        "item": "banana",
+        "expidays": "4"
+    },
+    {
+        "item": "watermelon",
+        "expidays": "7"
+    },
+    {
+        "item": "pineapple",
+        "expidays": "4"
     }
 ]
