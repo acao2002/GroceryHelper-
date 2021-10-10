@@ -58,7 +58,7 @@ const Home = () => {
                             style={{
                                 fontSize: "20px",
                                 color: "#ffffff",
-                                backgroundColor: colorScheme[index%5],
+                                backgroundColor: colorScheme[index%4],
                                 padding: "15px",
                                 boxShadow: "0px 15px 10px -15px rgba(108, 116, 143, 0.8)",
                             }}>
@@ -97,13 +97,13 @@ const Home = () => {
                                 Upload
                             </Button>
                             &nbsp;
-                            <Button onClick={onImageRemoveAll}>Remove all images</Button>
+                            <Button type="danger" onClick={onImageRemoveAll} shape="round">Remove all images</Button>
                             {imageList.map((image, index) => (
                             <div key={index} className="image-item">
-                                <img src={image['data_url']} alt="" width="100" />
+                                <Image  style={{marginTop: "10px"}} src={image['data_url']} alt="" width="100" />
                                 <div className="image-item__btn-wrapper">
-                                <button onClick={() => onImageUpdate(index)}>Update</button>
-                                <button onClick={() => onImageRemove(index)}>Remove</button>
+                                <Button shape="round" style={{marginBlock: "10px", marginRight: "10px"}} onClick={() => onImageUpdate(index)}>Update</Button>
+                                <Button shape="round" style={{marginBlock: "10px"}} onClick={() => onImageRemove(index)}>Remove</Button>
                                 </div>
                             </div>
                             ))}
