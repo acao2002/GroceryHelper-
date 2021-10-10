@@ -139,8 +139,8 @@ def run_detector(detector, path):
 
   for x in result["detection_class_entities"]:
 
-    if result["detection_scores"][index] > 0.6: 
-      print(x.decode("ascii"))
+    if result["detection_scores"][index] > 0.5: 
+      #print(x.decode("ascii"))
       #get a list of found objects 
       if x.decode("ascii").lower() not in list:
           list.append(x.decode("ascii").lower())
@@ -166,16 +166,16 @@ module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_re
 
 detector = hub.load(module_handle).signatures['default']
 
-file = input("Please enter the name of your file(ex: \"grocery.jpg\": ")
-found = run_detector(detector, file)
-print(found)
+#file = input("Please enter the name of your file(ex: \"grocery.jpg\": ")
+found = run_detector(detector, "test3.png")
+print("test2")
 output = []
 
 for item in datastore:
     if item['item'].lower() in found:
         output.append(item)
 
-print(output)
+print("output")
 
 with open('data.json', 'w') as fp:
     json.dump(output, fp,  indent=4)
